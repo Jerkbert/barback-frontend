@@ -15,6 +15,17 @@ export default class ProductForm extends Component {
         })
     }
 
+    handleSubmit = event => {
+        event.preventDefault()
+        this.props.addProduct(this.state)
+        this.setState({
+            name:"",
+            size:"",
+            price:"",
+            product_type:""
+        })
+    }
+
     render() {
         return (
             <div>
@@ -32,29 +43,23 @@ export default class ProductForm extends Component {
                         placeholder="Bottle Size"
                         value={this.state.size}
                         onChange={this.handleChange}/>
+                        <input
+                        type='text'
+                        name='price'
+                        placeholder="Price Paid"
+                        value={this.state.price}
+                        onChange={this.handleChange}/>
+                        <input
+                        type='text'
+                        name='product_type'
+                        placeholder="Product Type"
+                        value={this.state.product_type}
+                        onChange={this.handleChange}/>
+                        <button>Save Product</button>
+                        
                 </form>
             </div>
         )
     }
 }
 
-
-
-
-render() {
-    return (
-        <div>
-            <form onSubmit={this.handleSubmit}>
-                <label></label>
-                <input 
-                    type='text' 
-                    name='input' 
-                    placeholder="Search"
-                    value={this.state.input}
-                    onChange={this.handleChange}/>
-            </form>
-            
-        </div>
-    )
-}
-}
