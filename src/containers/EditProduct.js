@@ -16,19 +16,16 @@ export default class EditProduct extends Component {
             size:this.props.selectedProduct.size,
             price:this.props.selectedProduct.price,
             product_type:this.props.selectedProduct.product_type  
-    })
+        })
     }
 
     componentDidUpdate(prevProps){
         if(this.props.selectedProduct.id !== prevProps.selectedProduct.id) {
-
-            this.setState({
-                
-                    name:this.props.selectedProduct.name,
-                    size:this.props.selectedProduct.size,
-                    price:this.props.selectedProduct.price,
-                    product_type:this.props.selectedProduct.product_type
-                
+            this.setState({   
+                name:this.props.selectedProduct.name,
+                size:this.props.selectedProduct.size,
+                price:this.props.selectedProduct.price,
+                product_type:this.props.selectedProduct.product_type
             })
         }
     }
@@ -44,12 +41,9 @@ export default class EditProduct extends Component {
     handleSubmit = event => {
         event.preventDefault()
         this.props.editProduct(this.state, this.props.selectedProduct.id)
-        
     }
 
     render() {
-        // console.log('editing', this.props.selectedProduct)
-        console.log('edit state', this.props)
 
         return (
             <div>
@@ -62,6 +56,7 @@ export default class EditProduct extends Component {
                         placeholder="name"
                         value={this.state.name}
                         onChange={this.handleChange}/>
+                    
                     <input
                         className="form-item"
                         type='text'
@@ -70,7 +65,6 @@ export default class EditProduct extends Component {
                         value={this.state.price}
                         onChange={this.handleChange}/>
                      
-
                     <select
                         className="form-item"
                         name='product_type'
@@ -102,8 +96,6 @@ export default class EditProduct extends Component {
                             <option value="32oz">32 oz</option>
                             <option value="1 gal">1 gal</option>
                     </select>
-
-                     
 
                     <button className="form-submit">Edit Product</button>
                         

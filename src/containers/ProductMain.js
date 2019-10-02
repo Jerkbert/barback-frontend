@@ -54,7 +54,6 @@ export default class ProductMain extends Component {
     }
 
     editProduct=(product, id)=> {
-        console.log('editlog', )
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/api/v1/products/${id}`, {
             method: 'PATCH',
@@ -96,7 +95,6 @@ export default class ProductMain extends Component {
     }
 
     handleEditProductClick = (product) => {
-        // console.log(product)
         this.setState({
             showEditForm: true,
             selectedProduct: product
@@ -131,22 +129,22 @@ export default class ProductMain extends Component {
         this.setState({displayProducts})
         
         
-    }
-    
+    }    
     
     render() {
-        // console.log('selectedProduct', this.state.selectedProduct)
         return (
             <div>
                 <NavBar typeFilter={this.filterByType} filter={this.setSearchFilter} logout={this.props.logout} addProduct={this.handleAddProductClick}/>
+
                 <button onClick={()=>this.showProducts()}>show all products</button>
+
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
+
                 {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/> : null}
-                {this.state.displayProducts.length === 0 ? 
-                <h1>Add products to your bar</h1> :
-                <ProductCollection editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} />
-            }
-               
+
+                {this.state.displayProducts.length === 0 
+                ? <h1>Add products to your bar</h1> 
+                : <ProductCollection editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} /> } 
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import ProductSpecs from '../components/ProductSpecs'
-import ProductCollection from './ProductCollection'
+import DrinkProductCollection from './DrinkProductCollection'
 // import ProductShelf from './ProductShelf'
 import ProductForm from './ProductForm'
 import NavBar from './NavBar'
@@ -67,13 +67,11 @@ export default class DrinkBuilder extends Component {
     render() {
         return (
             <div>
-                <NavBar typeFilter={this.filterByType} filter={this.setSearchFilter} logout={this.props.logout} addProduct={this.handleAddProductClick}/>
-                <button onClick={()=>this.showProducts()}>show all products</button>
-                {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
-                {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/>: null }
+                <NavBar typeFilter={this.filterByType} filter={this.setSearchFilter} logout={this.props.logout}/>
+                <button onClick={()=>this.showProducts()}>show all products</button>           
                 {this.state.displayProducts.length === 0 ? 
                 <h1>Add products to your bar</h1> :
-                <ProductCollection editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} />
+                <DrinkProductCollection editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} />
                 }
                
             </div>
