@@ -17,7 +17,7 @@ export default class ProductMain extends Component {
         showAddForm: false,
         showEditForm: false,
         searchFilter: '',
-        selectedProduct:{}
+        selectedProduct:null
     }
 
     showProducts = () => {
@@ -54,6 +54,7 @@ export default class ProductMain extends Component {
     }
 
     editProduct=(product, id)=> {
+        console.log('editlog', )
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/api/v1/products/${id}`, {
             method: 'PATCH',
@@ -64,7 +65,10 @@ export default class ProductMain extends Component {
             body: JSON.stringify(product),
         })
         .then(result => result.json())
-        .then(res => console.log(res))
+        .then(res => this.showProducts())
+        .then(res => this.setState({
+            showEditForm: false
+        }))
       
     }
 
@@ -92,13 +96,14 @@ export default class ProductMain extends Component {
     }
 
     handleEditProductClick = (product) => {
+        // console.log(product)
         this.setState({
             showEditForm: true,
             selectedProduct: product
         })
         
     }
-
+    
     filterByType = (product_type) => {
         if(product_type !== 'All'){
             this.setState({
@@ -118,23 +123,25 @@ export default class ProductMain extends Component {
             this.search()
         })
     }
-
+    
     search = () => {
         let displayProducts = this.state.allProducts.filter( prod => {
             return prod.name.toLowerCase().includes(this.state.searchFilter.toLowerCase())
         })
         this.setState({displayProducts})
-
+        
+        
     }
-
-
+    
+    
     render() {
+        // console.log('selectedProduct', this.state.selectedProduct)
         return (
             <div>
                 <NavBar typeFilter={this.filterByType} filter={this.setSearchFilter} logout={this.props.logout} addProduct={this.handleAddProductClick}/>
                 <button onClick={()=>this.showProducts()}>show all products</button>
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
-                {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/>: null }
+                {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/> : null}
                 {this.state.displayProducts.length === 0 ? 
                 <h1>Add products to your bar</h1> :
                 <ProductCollection editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} />

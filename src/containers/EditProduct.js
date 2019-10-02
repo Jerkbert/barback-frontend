@@ -3,11 +3,34 @@ import './Containers.css'
 
 export default class EditProduct extends Component {
     state={
-        name:this.props.selectedProduct.name,
-        size:this.props.selectedProduct.size,
-        price:this.props.selectedProduct.price,
-        product_type:this.props.selectedProduct.product_type
+        name:"",
+        size:"",
+        price:0,
+        product_type:""
     
+    }
+
+    componentDidMount(){
+        this.setState({            
+            name:this.props.selectedProduct.name,
+            size:this.props.selectedProduct.size,
+            price:this.props.selectedProduct.price,
+            product_type:this.props.selectedProduct.product_type  
+    })
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.selectedProduct.id !== prevProps.selectedProduct.id) {
+
+            this.setState({
+                
+                    name:this.props.selectedProduct.name,
+                    size:this.props.selectedProduct.size,
+                    price:this.props.selectedProduct.price,
+                    product_type:this.props.selectedProduct.product_type
+                
+            })
+        }
     }
 
     handleChange = (event) => {
@@ -21,20 +44,15 @@ export default class EditProduct extends Component {
     handleSubmit = event => {
         event.preventDefault()
         this.props.editProduct(this.state, this.props.selectedProduct.id)
-        this.setState({
-            name:'',
-            size:'',
-            price:'',
-            product_type:''
-        })
+        
     }
 
     render() {
         // console.log('editing', this.props.selectedProduct)
-        console.log('edit state', this.state)
+        console.log('edit state', this.props)
 
         return (
-            <div >
+            <div>
                 <form  onSubmit={this.handleSubmit}>
                    
                     <input
