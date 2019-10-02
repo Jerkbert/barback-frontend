@@ -18,9 +18,11 @@ export default class ProductSearch extends Component {
     render() {
         return (
             <div>
+               
                 <form onSubmit={this.handleSubmit}>
-                    <label></label>
+                    <label>Search by Product Name:</label>
                     <input 
+                        className="form-item"
                         type='text' 
                         name='input' 
                         placeholder="Search"

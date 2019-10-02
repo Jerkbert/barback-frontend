@@ -33,6 +33,21 @@
     margin-top: 0;
     margin-bottom: 10px;
 }
+.nav-bar{
+    font-family: 'Raleway', sans-serif;
+    padding: 5px;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 5px
+}
+.nav-bar-left{
+    display: flex;
+    justify-content: flex-start
+}
 
 .form-item{
     font-family: 'Raleway', sans-serif;

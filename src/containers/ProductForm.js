@@ -31,7 +31,7 @@ export default class ProductForm extends Component {
         return (
             <div >
                 <form  onSubmit={this.handleSubmit}>
-                    <label></label>
+                   
                     <input
                         className="form-item"
                         type='text'
@@ -39,16 +39,16 @@ export default class ProductForm extends Component {
                         placeholder="Product Name"
                         value={this.state.name}
                         onChange={this.handleChange}/>
-                        <input
+                    <input
                         className="form-item"
                         type='text'
                         name='price'
                         placeholder="Price Paid"
                         value={this.state.price}
                         onChange={this.handleChange}/>
-                        <label>
+                     
 
-                        <select
+                    <select
                         className="form-item"
                         name='product_type'
                         value={this.state.product_type}
@@ -62,10 +62,9 @@ export default class ProductForm extends Component {
                             <option value="Liqueur">Liqueur</option>
                             <option value="Non Alcoholic">Non Alcoholic</option>
                             <option value="Bitter">Bitter</option>
-                        </select>
-                        </label>
-                        <label>
-                        <select
+                    </select>
+                       
+                    <select
                         className="form-item"
                         name='size'
                         value={this.state.size}
@@ -79,11 +78,11 @@ export default class ProductForm extends Component {
                             <option value="12 oz">12 oz</option>
                             <option value="32oz">32 oz</option>
                             <option value="1 gal">1 gal</option>
-                            </select>
+                    </select>
 
-                        </label>
+                     
 
-                        <button className="form-submit">Save Product</button>
+                    <button className="form-submit">Save Product</button>
                         
                 </form>
             </div>

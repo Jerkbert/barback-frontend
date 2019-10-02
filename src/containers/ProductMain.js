@@ -13,7 +13,8 @@ export default class ProductMain extends Component {
         savedProducts:[],
         currentProduct: {},
         showProduct: false,
-        showAddForm: false
+        showAddForm: false,
+        searchFilter: ''
     }
 
     componentDidMount(){
@@ -43,12 +44,13 @@ export default class ProductMain extends Component {
         })
         .then(result => console.log(result.json()))
         .then(this.setState({
-            displayProducts: [...this.state.displayProducts, product]
+            allProducts: [...this.state.allProducts, product],
+            displayProducts: [...this.state.displayProducts, product],
+            showAddForm: false
         }))
     }
 
     deleteProduct = (id) => {
-        console.log(id)
         const token = localStorage.getItem('token')
         fetch(`http://localhost:3000/api/v1/products/${id}`, {
             method: 'DELETE',
@@ -57,8 +59,8 @@ export default class ProductMain extends Component {
                 'Authorization': `Bearer ${token}`
             }
         })
-        const {displayProducts} = this.state
-        const newProducts = displayProducts.filter(product => product.id !== id)
+        const {allProducts} = this.state
+        const newProducts = allProducts.filter(product => product.id !== id)
         this.setState({
             displayProducts: newProducts,
             allProducts: newProducts
@@ -83,15 +85,33 @@ export default class ProductMain extends Component {
         }
     }
 
+    setSearchFilter = (searchFilter) => {
+        this.setState({
+            searchFilter: searchFilter
+        }, () => {
+            this.search()
+        })
+    }
+
+    search = () => {
+        let displayProducts = this.state.allProducts.filter( prod => {
+            return prod.name.toLowerCase().includes(this.state.searchFilter.toLowerCase())
+        })
+        this.setState({displayProducts}, () => {
+            console.log(this.state.displayProducts)
+        })
+
+    }
+
 
     render() {
         return (
             <div>
-                <NavBar filter={this.filterByType}/>
-                {this.state.showAddForm ? null : <button onClick={this.handleAddProductClick}>Add New Products</button>}
+                <NavBar typeFilter={this.filterByType} filter={this.setSearchFilter} logout={this.props.logout} addProduct={this.handleAddProductClick}/>
+               
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
                 <ProductCollection cardAction={this.deleteProduct} products={this.state.displayProducts} />
-                <button onClick={()=> this.props.logout()}> log out </button>
+               
             </div>
         )
     }

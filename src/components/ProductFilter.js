@@ -4,8 +4,8 @@ export default function ProductFilter(props) {
     return (
         <div>
             <label>
-                <h1>Filter by Product Type:</h1>
-                <select onChange={(event)=> props.filter(event.target.value)}>
+                <label>Filter by Product Type:</label>
+                <select className="form-item" onChange={(event)=> props.filter(event.target.value)}>
                     <option value="All">All</option>
                     <option value="Agave">Agave</option>
                     <option value="Gin">Gin</option>
