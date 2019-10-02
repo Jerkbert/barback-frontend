@@ -11,7 +11,7 @@ export default function ProductCard(props) {
                 <span className="product-cat"> | category: {product.product_type} </span>
                 <span className="product-size"> | size: {product.size} </span>  
                 
-                <button onClick={editProduct}>Edit</button>
+                <button onClick={()=> editProduct(product, product.id)}>Edit</button>
                 <button onClick={()=> cardAction(product.id)}>Delete</button>
 
         </div>

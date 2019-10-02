@@ -4,6 +4,7 @@ import ProductCollection from './ProductCollection'
 // import ProductShelf from './ProductShelf'
 import ProductForm from './ProductForm'
 import NavBar from './NavBar'
+import EditProduct from './EditProduct'
 
 
 export default class ProductMain extends Component {
@@ -14,10 +15,12 @@ export default class ProductMain extends Component {
         currentProduct: {},
         showProduct: false,
         showAddForm: false,
-        searchFilter: ''
+        showEditForm: false,
+        searchFilter: '',
+        selectedProduct:{}
     }
 
-    componentDidMount(){
+    showProducts = () => {
         const token = localStorage.getItem('token')
         fetch('http://localhost:3000/api/v1/products/', {
             method: 'GET',
@@ -32,7 +35,7 @@ export default class ProductMain extends Component {
         }))
     }
 
-    addProduct=(product)=> {
+    addProduct = (product)=> {
         const token = localStorage.getItem('token')
         fetch('http://localhost:3000/api/v1/products/', {
             method: 'POST',
@@ -48,6 +51,21 @@ export default class ProductMain extends Component {
             displayProducts: [...this.state.displayProducts, product],
             showAddForm: false
         }))
+    }
+
+    editProduct=(product, id)=> {
+        const token = localStorage.getItem('token')
+        fetch(`http://localhost:3000/api/v1/products/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization':`Bearer ${token}`
+            },
+            body: JSON.stringify(product),
+        })
+        .then(result => result.json())
+        .then(res => console.log(res))
+      
     }
 
     deleteProduct = (id) => {
@@ -71,6 +89,14 @@ export default class ProductMain extends Component {
         this.setState({
             showAddForm: true
         })
+    }
+
+    handleEditProductClick = (product) => {
+        this.setState({
+            showEditForm: true,
+            selectedProduct: product
+        })
+        
     }
 
     filterByType = (product_type) => {
@@ -97,9 +123,7 @@ export default class ProductMain extends Component {
         let displayProducts = this.state.allProducts.filter( prod => {
             return prod.name.toLowerCase().includes(this.state.searchFilter.toLowerCase())
         })
-        this.setState({displayProducts}, () => {
-            console.log(this.state.displayProducts)
-        })
+        this.setState({displayProducts})
 
     }
 
@@ -108,9 +132,13 @@ export default class ProductMain extends Component {
         return (
             <div>
                 <NavBar typeFilter={this.filterByType} filter={this.setSearchFilter} logout={this.props.logout} addProduct={this.handleAddProductClick}/>
-               
+                <button onClick={()=>this.showProducts()}>show all products</button>
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
-                <ProductCollection cardAction={this.deleteProduct} products={this.state.displayProducts} />
+                {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/>: null }
+                {this.state.displayProducts.length === 0 ? 
+                <h1>Add products to your bar</h1> :
+                <ProductCollection editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} />
+            }
                
             </div>
         )
