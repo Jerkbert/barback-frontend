@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Login.css'
 
 export default class Login extends Component {
     state={
@@ -50,29 +51,33 @@ export default class Login extends Component {
 
     render() {
         return this.props.user ? null : (
-            <div>
-                <button onClick={this.handleLogInClick}>LOG IN</button>
-                <button onClick={this.handleNewUserClick}>CREATE NEW USER</button>
-                {this.state.login ?
-                <form onSubmit={this.handleLogInSubmit}>
-                    <label>Username</label>
-                    <input type='text' name='username' value={this.state.username} onChange={this.handleChange}/>
-                    <label>Password</label>
-                    <input type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
-                    <input type="submit"/> 
-                </form> : null }
-                {this.state.createNew ? 
+            <div className="center">
+                <div className="card">
+                <h1 className="header">BARBACK</h1>
+                    
+                    {this.state.login ?
+                    <form onSubmit={this.handleLogInSubmit}>
+                        <label>USERNAME</label>
+                        <input className="form-item" type='text' name='username' value={this.state.username} onChange={this.handleChange}/>
+                        <label>PASSWORD</label>
+                        <input className="form-item" type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
+                        <input className="form-submit" type="submit" value="Submit" /> 
+                    </form> : null }
+                    {this.state.createNew ? 
 
-                <form onSubmit={this.handleNewUserSubmit}>
-                    <label>Username</label>
-                    <input type='text' name='username' value={this.state.username} onChange={this.handleChange}/>
-                    <label>Password</label>
-                    <input type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
-                    <label>Re-enter Password</label>
-                    <input type='password' name='passCheck' value={this.state.passCheck} onChange={this.handleChange}/>
-                    {this.state.password !== this.state.passCheck ? <span>Passwords don't match!</span> : null}
-                    <input type="submit" />
-                </form> : null }
+                    <form  onSubmit={this.handleNewUserSubmit}>
+                        <label>Username</label>
+                        <input className="form-item" type='text' name='username' value={this.state.username} onChange={this.handleChange}/>
+                        <label>Password</label>
+                        <input className="form-item" type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
+                        <label>Re-enter Password</label>
+                        <input className="form-item" type='password' name='passCheck' value={this.state.passCheck} onChange={this.handleChange}/>
+                        {this.state.password !== this.state.passCheck ? <span>Passwords don't match!</span> : null}
+                        <input className="form-submit" type="submit" value="Submit" />
+                    </form> : null }
+                    <button className="login-submit" onClick={this.handleLogInClick}>LOG IN</button>
+                    <button className="login-submit" onClick={this.handleNewUserClick}>CREATE NEW USER</button>
+                </div>
             </div>
         )
     }

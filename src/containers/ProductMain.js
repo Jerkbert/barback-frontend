@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import ProductCollection from './ProductCollection'
 // import ProductShelf from './ProductShelf'
 import ProductForm from './ProductForm'
+import NavBar from './NavBar'
 
 
 export default class ProductMain extends Component {
@@ -11,7 +12,8 @@ export default class ProductMain extends Component {
         displayProducts: [],
         savedProducts:[],
         currentProduct: {},
-        showProduct: false
+        showProduct: false,
+        showAddForm: false
     }
 
     componentDidMount(){
@@ -41,16 +43,54 @@ export default class ProductMain extends Component {
         })
         .then(result => console.log(result.json()))
         .then(this.setState({
-            displayProducts: [...this.state.allProducts, product]
+            displayProducts: [...this.state.displayProducts, product]
         }))
+    }
+
+    deleteProduct = (id) => {
+        console.log(id)
+        const token = localStorage.getItem('token')
+        fetch(`http://localhost:3000/api/v1/products/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const {displayProducts} = this.state
+        const newProducts = displayProducts.filter(product => product.id !== id)
+        this.setState({
+            displayProducts: newProducts,
+            allProducts: newProducts
+        })
+    }
+
+    handleAddProductClick = () => {
+        this.setState({
+            showAddForm: true
+        })
+    }
+
+    filterByType = (product_type) => {
+        if(product_type !== 'All'){
+            this.setState({
+                displayProducts: this.state.allProducts.filter( prod => prod.product_type === product_type)
+            })
+        }else{
+            this.setState({
+                displayProducts: this.state.allProducts
+            })
+        }
     }
 
 
     render() {
         return (
             <div>
-                <ProductForm addProduct={this.addProduct}/>
-                <ProductCollection products={this.state.displayProducts} />
+                <NavBar filter={this.filterByType}/>
+                {this.state.showAddForm ? null : <button onClick={this.handleAddProductClick}>Add New Products</button>}
+                {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
+                <ProductCollection cardAction={this.deleteProduct} products={this.state.displayProducts} />
                 <button onClick={()=> this.props.logout()}> log out </button>
             </div>
         )

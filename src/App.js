@@ -8,7 +8,16 @@ function App() {
 
   const [user, setUser] = React.useState(null)
 
+  const getToken = () => {
+    localStorage.getItem('token')
+  }
+
+  const loggedIn = () => {
+    getToken()
+  }
+
   const login = (user) => {
+    
     fetch('http://localhost:3000/api/v1/login', {
       method: 'POST',
       headers: {
