@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 
 export default class DrinkCard extends Component {
-    state={
-        value:0
-    }
 
     componentDidMount(){
-    const {product} = this.props
+        
+    
+
+    
+
+    
+    const {product, drinkValue} = this.props
 
     let productSize
 
@@ -82,9 +85,6 @@ export default class DrinkCard extends Component {
     }
 
     const value = (parseFloat(product.price / productSize * proportion).toFixed(2))
-    this.setState({
-        value:value
-    })
     
     this.props.drinkValue(value)
     
@@ -94,7 +94,7 @@ export default class DrinkCard extends Component {
     
     return (
         <div>
-            <p>{this.props.product.quantity} {this.props.product.name} cost: ${this.state.value}</p>
+            <p>{this.props.product.quantity} {this.props.product.name} cost: ${value}</p>
             
         </div>
     )

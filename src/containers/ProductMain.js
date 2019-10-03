@@ -18,7 +18,8 @@ export default class ProductMain extends Component {
         selectedProduct:null,
         showBuilder: false, 
         showProducts: false,
-        addedIngs: []
+        addedIngs: [],
+        totalValue: 0
     }
 
     showProducts = () => {
@@ -151,9 +152,10 @@ export default class ProductMain extends Component {
     } 
 
     addIngs = (product, quantity) => {
-        
+       
         let updatedProduct = product
         updatedProduct.quantity = quantity
+
         this.setState({
                 addedIngs:[...this.state.addedIngs, updatedProduct]
             })
@@ -165,9 +167,15 @@ export default class ProductMain extends Component {
         })
     }
 
+    drinkValue = (value) => {
+        console.log('test')
+        this.setState({
+            totalValue: this.state.totalValue + (parseFloat(value))
+        })
+    }
+
     
     render() {
-        console.log(this.state.addedIngs)
        
         return (
            
@@ -188,7 +196,7 @@ export default class ProductMain extends Component {
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
 
                 {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/> : null}
-                {this.state.addedIngs.length > 0 ? <DrinkBuilder resetDrink={this.resetDrink}addedIngs={this.state.addedIngs} /> : null}
+                {this.state.addedIngs.length > 0 ? <DrinkBuilder totalValue={this.state.totalValue} drinkValue={this.drinkValue} resetDrink={this.resetDrink} addedIngs={this.state.addedIngs} /> : null}
 
                 {this.state.showBuilder 
                 ? <IngCollection addIngs={this.addIngs} products={this.state.displayProducts} addedIngs={this.state.addedIngs}/> : null }
