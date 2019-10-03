@@ -9,7 +9,8 @@ export default function ProductCollection(props) {
             cardAction={props.cardAction} 
             product={product} 
             key={product.id} 
-            id={product.id}/>
+            id={product.id}
+            addIngs={props.addIngs}/>
     ))
     return (
         <div className="collection-container">

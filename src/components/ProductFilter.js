@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function ProductFilter(props) {
     return (
-        <div>
+        <div className="form-item">
             <label>
                 <label>Filter by Product Type:</label>
-                <select className="form-item" onChange={(event)=> props.filter(event.target.value)}>
+                <select onChange={(event)=> props.filter(event.target.value)}>
                     <option value="All">All</option>
                     <option value="Agave">Agave</option>
                     <option value="Gin">Gin</option>

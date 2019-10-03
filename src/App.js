@@ -14,7 +14,7 @@ function App() {
   }
 
   const loggedIn = () => {
-    getToken()
+    getToken()  
   }
 
   const login = (user) => {

@@ -20,12 +20,12 @@ export default class ProductSearch extends Component {
             <div>
                
                 <form onSubmit={this.handleSubmit}>
-                    <label>Search by Product Name:</label>
+                  
                     <input 
                         className="form-item"
                         type='text' 
                         name='input' 
-                        placeholder="Search"
+                        placeholder="Search by Product Name"
                         value={this.state.input}
                         onChange={this.handleChange}/>
                 </form>

@@ -10,8 +10,11 @@ export default function NavBar(props) {
                 <ProductFilter filter={props.typeFilter}/>
                 <ProductSearch filter={props.filter}/>
             </div>
+            <button className="form-submit" onClick={()=>props.showProducts()}>show all products</button>
             <button className="form-submit" onClick={()=>props.addProduct()}>add product</button>
+            <button className="form-submit" onClick={() =>props.goToBuilder()}>Drink Builder</button>
             <button className="form-submit" onClick={()=> props.logout()}>logout</button>
+            
         </div>
     )
 }
