@@ -76,7 +76,7 @@ export default class ProductForm extends Component {
                             <option value="1.75L">1.75L</option>
                             <option value="5.5 oz">5.5 oz</option>
                             <option value="12 oz">12 oz</option>
-                            <option value="32oz">32 oz</option>
+                            <option value="32 oz">32 oz</option>
                             <option value="1 gal">1 gal</option>
                     </select>
 

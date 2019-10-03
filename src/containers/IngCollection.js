@@ -1,7 +1,7 @@
 import React from 'react'
 import IngCard from '../components/IngCard'
 import './Containers.css'
-import DrinkBuilder from './DrinkBuilder'
+
 
 export default function IngCollection(props) {
     const productCards = props.products.map( product => (
@@ -15,7 +15,7 @@ export default function IngCollection(props) {
     ))
     return (
         <div className="collection-container">
-            {/* <DrinkBuilder /> */}
+          
             {productCards}
         </div>
     )

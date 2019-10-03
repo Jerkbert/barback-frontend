@@ -151,11 +151,18 @@ export default class ProductMain extends Component {
     } 
 
     addIngs = (product, quantity) => {
+        
         let updatedProduct = product
         updatedProduct.quantity = quantity
         this.setState({
                 addedIngs:[...this.state.addedIngs, updatedProduct]
             })
+    }
+
+    resetDrink = () => {
+        this.setState({
+            addedIngs:[]
+        })
     }
 
     
@@ -181,6 +188,7 @@ export default class ProductMain extends Component {
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
 
                 {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/> : null}
+                {this.state.addedIngs.length > 0 ? <DrinkBuilder resetDrink={this.resetDrink}addedIngs={this.state.addedIngs} /> : null}
 
                 {this.state.showBuilder 
                 ? <IngCollection addIngs={this.addIngs} products={this.state.displayProducts} addedIngs={this.state.addedIngs}/> : null }
