@@ -93,7 +93,7 @@ export default class DrinkCard extends Component {
     render(){   
         return (
             <div >
-                <p>{this.props.product.quantity} {this.props.product.name} cost: ${this.state.value}</p>
+                <p>{this.props.product.quantity} {this.props.product.name} <span className="ing-cost">cost: ${this.state.value}</span> </p>
                 
             </div>
         )

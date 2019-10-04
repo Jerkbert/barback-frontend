@@ -2,30 +2,31 @@
 
 .product-container{
     font-family: 'Raleway', sans-serif;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     position: absolute;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('./image.jpg')
+    background-image: url('./image.png')
 }
 
 .filter-label{
-    font-weight: bold;
+    /* font-weight: bold; */
     color: black
 }
 
 .collection {
     display: flex;
+    justify-content: center
     /* flex-direction: row-reverse */
 }
 
 .main-product-container{
     color: rgb(203, 203, 203);
     font-family: 'Raleway', sans-serif;
-    background-color: rgb(203, 203, 203);
+    /* background-color: rgb(203, 203, 203); */
     position: absolute;
     height: 100%;
     width: 100%;
@@ -41,7 +42,7 @@
     padding: 5px;
     background-color: whitesmoke;
     color: black;
-    width: 55%
+    width: 55%;
 }
 
 .drink-build{
@@ -51,7 +52,9 @@
 
 .user-name {
     color: black;
-    border: .5px solid gray
+    border-top: .5px solid gray;
+    border-bottom: .5px solid gray;
+    text-shadow: 0 0 3px white
 }
 
 .drink-card{
@@ -117,7 +120,8 @@
 
 ::placeholder {
     color:black;
-    font-size: 16px
+    font-size: 16px;
+    font-weight: lighter
 }
 
 

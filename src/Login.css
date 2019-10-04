@@ -17,6 +17,7 @@
     background-color: #fff;
     border-radius: 15px;
     padding: 0.8rem;
+    border: 1px solid gray
 }
 
 .card > form{
@@ -48,6 +49,7 @@
     letter-spacing: 0.2rem;
     transition: 0.3s opacity ease;
     cursor: pointer;
+    margin: 5px
 }
 .form-submit:hover{
    opacity: 0.6;
