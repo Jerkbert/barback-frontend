@@ -51,6 +51,7 @@ export default class Login extends Component {
 
     render() {
         return this.props.user ? null : (
+            
             <div className="center">
                 <div className="card">
                 <h1 className="header">BARBACK</h1>

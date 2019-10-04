@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('./image.jpg')
 }
 
 .filter-label{
@@ -28,6 +29,8 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    background-image: url('./image.png');
+    background-size: cover
    
 }
 
@@ -80,6 +83,7 @@
 }
 .nav-bar{
     font-family: 'Raleway', sans-serif;
+    flex-wrap: wrap;
     padding: 5px;
     margin: 5px;
     padding: 5px;
@@ -97,7 +101,7 @@
     align-items: center;
     padding-right: 4px;
     padding-left: 4px;
-    border: 1px solid grey
+    /* border: 1px solid grey */
 }
 
 .form-item{

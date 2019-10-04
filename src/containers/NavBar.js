@@ -14,7 +14,7 @@ export default function NavBar(props) {
             <button className="form-submit" onClick={()=>props.showProducts()}>refresh products</button>
             <button className="form-submit" onClick={()=>props.addProduct()}>add product</button>
             {props.allProducts.length > 0 ? 
-            <button className="form-submit" onClick={()=>props.goToBuilder()}>Toggle Drink Mode</button> : null }
+            <button className="form-submit" onClick={()=>props.goToBuilder()}>drink mode</button> : null }
             <button className="form-submit" onClick={()=>props.logout()}>logout</button>
             
         </div>
