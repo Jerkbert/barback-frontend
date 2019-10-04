@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import EditProduct from './EditProduct'
 import IngCollection from './IngCollection'
 import DrinkBuilder from './DrinkBuilder'
+import './Containers.css'
 
 
 export default class ProductMain extends Component {
@@ -23,7 +24,6 @@ export default class ProductMain extends Component {
     }
 
     showProducts = () => {
-        
         const token = localStorage.getItem('token')
         fetch('http://localhost:3000/api/v1/products/', {
             method: 'GET',
@@ -35,11 +35,13 @@ export default class ProductMain extends Component {
         .then(result => this.setState({
             allProducts: result,
             displayProducts: result,
-            showProducts: true
-        }))
-        
+            showProducts: true,           
+        }, () => this.sortProducts()))
     }
     
+    componentDidMount(){
+        this.showProducts()
+    }
 
     addProduct = (product)=> {
         const token = localStorage.getItem('token')
@@ -73,10 +75,8 @@ export default class ProductMain extends Component {
         
         .then(res => this.showProducts())
         .then(res => this.setState({
-            showEditForm: false,
-            
+            showEditForm: false,           
         }))
-
     }
 
     deleteProduct = (id) => {
@@ -137,6 +137,14 @@ export default class ProductMain extends Component {
         this.setState({displayProducts})        
     }
 
+    sortProducts = () => {
+        let sortedProducts = []
+        sortedProducts = this.state.displayProducts.sort((a, b) => a.name > b.name ? 1 : -1)
+        this.setState({
+            displayProducts: sortedProducts
+        })
+    }
+
     goToBuilder = () => {
         if (this.state.showBuilder === true) {
             this.setState({
@@ -146,41 +154,40 @@ export default class ProductMain extends Component {
         }else{
             this.setState({
                 showBuilder: true,
-                showProducts: false
+                showProducts: true
             })
         }
     } 
 
     addIngs = (product, quantity) => {
-       
         let updatedProduct = product
         updatedProduct.quantity = quantity
-
         this.setState({
-                addedIngs:[...this.state.addedIngs, updatedProduct]
-            })
+            addedIngs:[...this.state.addedIngs, updatedProduct]
+        })
     }
 
     resetDrink = () => {
         this.setState({
-            addedIngs:[]
+            addedIngs:[],
+            totalValue:0
         })
     }
 
     drinkValue = (value) => {
-        console.log('test')
         this.setState({
             totalValue: this.state.totalValue + (parseFloat(value))
         })
     }
 
-    
     render() {
        
         return (
            
-            <div>
-              {this.props.user ? <h2>Welcome to Barback, {this.props.user.username}!</h2> : null }
+            <div className="main-product-container">
+
+                {this.props.user ? <h2 className="user-name">Welcome to Barback, {this.props.user.username}!</h2> : null }
+              
                 <NavBar 
                     goToBuilder={this.goToBuilder} 
                     typeFilter={this.filterByType} 
@@ -189,23 +196,29 @@ export default class ProductMain extends Component {
                     addProduct={this.handleAddProductClick}
                     showProducts={this.showProducts}
                     drinkBuilder={this.goToBuilder}
+                    allProducts={this.state.allProducts}
+                    sortProducts={this.sortProducts}
                 />
-
-                
 
                 {this.state.showAddForm ? <ProductForm addProduct={this.addProduct}/> : null}
 
                 {this.state.showEditForm ? <EditProduct editProduct={this.editProduct} selectedProduct={this.state.selectedProduct}/> : null}
-                {this.state.addedIngs.length > 0 ? <DrinkBuilder totalValue={this.state.totalValue} drinkValue={this.drinkValue} resetDrink={this.resetDrink} addedIngs={this.state.addedIngs} /> : null}
-
-                {this.state.showBuilder 
-                ? <IngCollection addIngs={this.addIngs} products={this.state.displayProducts} addedIngs={this.state.addedIngs}/> : null }
-
-                {this.state.allProducts.length === 0 ? null :
-                <ProductCollection  editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} /> }
-
                 
-                 
+                <div className="collection">
+                
+                    {this.state.showBuilder 
+                    ? <IngCollection addIngs={this.addIngs} products={this.state.displayProducts} addedIngs={this.state.addedIngs}/> 
+                    : <ProductCollection  editProduct={this.handleEditProductClick} cardAction={this.deleteProduct} products={this.state.displayProducts} />  }
+                    
+                    {this.state.addedIngs.length > 0 
+                    ? <DrinkBuilder 
+                        totalValue={this.state.totalValue} 
+                        drinkValue={this.drinkValue} 
+                        resetDrink={this.resetDrink} 
+                        addedIngs={this.state.addedIngs} /> 
+                    : null}
+                </div>
+                                 
             </div>
         )
     }

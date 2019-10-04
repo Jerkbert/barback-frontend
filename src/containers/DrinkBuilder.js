@@ -1,5 +1,6 @@
 import React from 'react'
 import DrinkCard from '../components/DrinkCard'
+import './Containers.css'
 
 
 export default function DrinkBuilder(props) {
@@ -9,13 +10,15 @@ export default function DrinkBuilder(props) {
     ))
   
     return (
-        <div >
-            <h1>Build a drink!</h1>
-           {addedIngs}
-           <h2>Drink cost: ${parseFloat(props.totalValue).toFixed(2)}</h2>
-           <h2>Recommended Price: ${parseFloat(props.totalValue*5).toFixed(2)}</h2>
+        <div className="drink-card" >
+            <h1>Drink Builder</h1>
+                <div className="drink-build">
+                {addedIngs}
+                </div>
+            <h2>Total Cost: ${parseFloat(props.totalValue).toFixed(2)}</h2>
+            <h2>Recommended Price: ${parseFloat(props.totalValue*5).toFixed(2)}</h2>
 
-           <button onClick={() => props.resetDrink()}>Reset</button>
+           <button className="form-submit"onClick={() => props.resetDrink()}>Reset</button>
         </div>
     )
 

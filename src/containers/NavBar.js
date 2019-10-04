@@ -7,13 +7,15 @@ export default function NavBar(props) {
     return (
         <div className = "nav-bar">
             <div className="nav-bar-left">
-                <ProductFilter filter={props.typeFilter}/>
                 <ProductSearch filter={props.filter}/>
+                <ProductFilter filter={props.typeFilter}/>
+                <button className="form-submit" onClick={()=>props.sortProducts()}>Sort A-Z</button>
             </div>
-            <button className="form-submit" onClick={()=>props.showProducts()}>show all products</button>
+            <button className="form-submit" onClick={()=>props.showProducts()}>refresh products</button>
             <button className="form-submit" onClick={()=>props.addProduct()}>add product</button>
-            <button className="form-submit" onClick={() =>props.goToBuilder()}>Drink Mode</button>
-            <button className="form-submit" onClick={()=> props.logout()}>logout</button>
+            {props.allProducts.length > 0 ? 
+            <button className="form-submit" onClick={()=>props.goToBuilder()}>Toggle Drink Mode</button> : null }
+            <button className="form-submit" onClick={()=>props.logout()}>logout</button>
             
         </div>
     )

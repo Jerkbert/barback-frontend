@@ -61,7 +61,7 @@ export default class Login extends Component {
                         <input className="form-item" type='text' name='username' value={this.state.username} onChange={this.handleChange}/>
                         <label>PASSWORD</label>
                         <input className="form-item" type='password' name='password' value={this.state.password} onChange={this.handleChange}/>
-                        <input className="form-submit" type="submit" value="Submit" /> 
+                        <input className="form-submit" type="submit" value="LOG IN" /> 
                     </form> : null }
                     {this.state.createNew ? 
 
@@ -73,10 +73,10 @@ export default class Login extends Component {
                         <label>Re-enter Password</label>
                         <input className="form-item" type='password' name='passCheck' value={this.state.passCheck} onChange={this.handleChange}/>
                         {this.state.password !== this.state.passCheck ? <span>Passwords don't match!</span> : null}
-                        <input className="form-submit" type="submit" value="Submit" />
+                        <input className="form-submit" type="submit" value="START" />
                     </form> : null }
-                    <button className="login-submit" onClick={this.handleLogInClick}>LOG IN</button>
-                    <button className="login-submit" onClick={this.handleNewUserClick}>CREATE NEW USER</button>
+                    <button className="login-submit" onClick={this.handleLogInClick}>I HAVE A BAR</button>
+                    <button className="login-submit" onClick={this.handleNewUserClick}>CREATE MY BAR</button>
                 </div>
             </div>
         )

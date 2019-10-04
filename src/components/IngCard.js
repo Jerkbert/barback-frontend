@@ -1,4 +1,5 @@
 import React from 'react'
+import './Components.css'
 
 export default function IngCard(props) {
     const { product, addIngs } = props
@@ -9,13 +10,14 @@ export default function IngCard(props) {
     }
 
     return (
-        <div>
+        <div className="product-line">
          
                 <span className="product-name"> {product.name} </span>
-                <span className="product-cat"> | category: {product.product_type} </span>
+                <span className="product-cat">  {product.product_type} </span>
 
-                <label>quantity</label>
+             
                 <select onChange={(event)=> getQuant(event.target.value)}>
+                    <option>select quantity</option>
                     <option value="2.5 oz">2.5 oz</option>
                     <option value="2.25 oz">2.25 oz</option>
                     <option value="2 oz">2 oz</option>
@@ -28,7 +30,8 @@ export default function IngCard(props) {
                     <option value=".25 oz">.25 oz</option>
                     <option value="dash">dash</option>
                 </select>
-                <button onClick={()=> addIngs(product, quantity)}>add to drink</button>
+        
+                <button className="item-submit" onClick={()=> addIngs(product, quantity)}>add to drink</button>
 
         </div>
     )

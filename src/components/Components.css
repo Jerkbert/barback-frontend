@@ -1,0 +1,43 @@
+.product-line{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding: 2px
+}
+
+.product-name{
+    align-self:flex-start;
+    font-weight: bold;
+    padding-right: 10px
+}
+
+.product-cat{
+    padding-right: 10px
+}
+
+.product-cost{
+    padding-right: 10px
+}
+.product-size{
+    padding-right: 10px
+}
+
+.item-submit{
+    align-self:right;
+    padding-left: 10px
+}
+
+select {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 2px;
+    padding: 2px;
+    border: 1px solid black;
+    border-radius: 0px;
+    width:115px
+    
+  
+    
+    
+  }
